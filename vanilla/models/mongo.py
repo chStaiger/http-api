@@ -7,7 +7,7 @@ from pymodm import MongoModel, fields
 
 
 class Testing(MongoModel):
-    prova = fields.CharField()
+    onefield = fields.CharField()
 
     class Meta:
         connection_alias = 'mytest'
