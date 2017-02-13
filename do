@@ -316,8 +316,9 @@ then
     echo "Docker stack: booting"
 
     if [ "$2" == "sql_admin" ]; then
-        echo "Administration for relational databases"
-        $compose_run up sqladmin
+        echo "Administration for mongo db"
+        # $compose_run up sqladmin
+        $compose_run up mongoui
         exit 0
     elif [ "$2" == "swagger" ]; then
         if [ "$1" != "DEBUG" ]; then

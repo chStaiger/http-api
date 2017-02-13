@@ -12,9 +12,10 @@ rest:
 ##################
 # NOTE: to be commented out if you need IRODS_EXTERNAL
   links:
+    # MONGO db must be called mongo
+    - mongodb:mongo # port 27017
     # IRODS MUST BE CALLED rodserver
     - icat:rodserver
-##################
     # # GRAPHDB MUST BE CALLED gdb
     # - graphdb:gdb
 
@@ -22,14 +23,21 @@ rest:
 #   ports:
 #     - 9090:7474
 
-sqladmin:
-  volumes_from:
-    - sharedvolumes
-  ports:
-    - 8888:8888
+# sqladmin:
+#   volumes_from:
+#     - sharedvolumes
+#   ports:
+#     - 8888:8888
+
 swagclient:
   ports:
     - 80:80
+
+mongoui:
+  links:
+    - mongodb:mongo
+  ports:
+    - 8081:8081
 
 apitests:
   links:

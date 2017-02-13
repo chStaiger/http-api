@@ -1,0 +1,8 @@
+
+class: TestMongo
+file: airods
+# baseuri: /api
+mapping:
+  mongotest: /airodsmongo
+labels:
+  - epos

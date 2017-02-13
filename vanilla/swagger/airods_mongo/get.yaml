@@ -1,0 +1,5 @@
+
+mongotest:
+  responses:
+    '200':
+      description: something
