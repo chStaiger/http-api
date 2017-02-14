@@ -114,8 +114,9 @@ rest:
     # B2ACCESS_APPKEY: SETYOURSECRETKEY
     #########################
 
-    # Base the user/role mechanism on neo4j
-    BACKEND_AUTH_SERVICE: relationaldb
+    # Base the user/role mechanism on main database
+    BACKEND_AUTH_SERVICE: mongo
+    # BACKEND_AUTH_SERVICE: relationaldb
 
     ########################
     ## Connection to irods

@@ -12,7 +12,14 @@ Mongo:
 ✔ Endpoint airods @done (17-02-13 12:21)
   ✔ specs and get YAML files @done (17-02-13 12:21)
   ✔ test service @done (17-02-13 12:21)
-☐ Mongodb auth with ODM
+✔ Mongodb auth with ODM @done (17-02-14 14:44)
+  ✔ write models @done (17-02-14 14:44)
+  ✔ write authenticator @done (17-02-14 14:44)
+☐ make basic EUDAT operations indipendent from the service
+ ☐ sql
+ ☐ neo4j
+ ☐ mongodb
+☐ check multiple databases connection
 ☐ Unittest
 
 

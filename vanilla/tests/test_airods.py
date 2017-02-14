@@ -34,10 +34,9 @@ class TestSomething(RestTestsAuthenticatedBase):
     #     super().tearDown()
 
     def test_01_GET_justatest(self):
-        """ Test directory creation: POST """
+        """ First test """
 
         log.info('*** Testing GET')
-        # GET non existing entity
         endpoint = (self._api_uri + self._main_endpoint)
         r = self.app.get(endpoint)  # , headers=self.__class__.auth_header)
         self.assertEqual(r.status_code, self._hcodes.HTTP_OK_BASIC)
