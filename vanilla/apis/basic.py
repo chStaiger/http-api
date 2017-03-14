@@ -94,7 +94,6 @@ class BasicEndpoint(Uploader, EudatEndpoint):
 
         if self._args.get('download'):
             # TO FIX: problem with swagger-ui boolean?
-            print("TEST!")
             if is_collection:
                 return self.send_errors(
                     'collection', 'Recursive download is not allowed')
@@ -285,7 +284,7 @@ class BasicEndpoint(Uploader, EudatEndpoint):
             .upload(subfolder=r.username, force=force)
 
         # Check if upload response is success
-## TO FIX: custom split of a custom response
+#  TO FIX: custom split of a custom response
 # this piece of code does not work with a custom response
 # if it changes the main blocks of the json root;
 # the developer should be able to provide a 'custom_split' on this
