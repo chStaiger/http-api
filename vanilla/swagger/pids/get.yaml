@@ -22,7 +22,7 @@ single:
            or download it or list a collection
   parameters:
     - name: download
-      description: activate file downloading (if PID points to a single file)
+      description: Activate file downloading (if PID points to a single file)
       in: query
       type: boolean
   responses:
