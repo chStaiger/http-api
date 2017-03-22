@@ -17,6 +17,9 @@ from ..rest.definition import EndpointResource
 from commons import htmlcodes as hcodes
 from commons.logs import get_logger
 
+from b2handle.handleclient import EUDATHandleClient
+from b2handle import handleexceptions
+
 log = get_logger(__name__)
 
 
@@ -33,7 +36,30 @@ class PIDEndpoint(EndpointResource):
                 code=hcodes.HTTP_BAD_REQUEST)
 
         ###################
-        # Performe B2HANDLE request
+        # Perform B2HANDLE request: retrieve URL from handle
         ###################
+        value = None
+        client = EUDATHandleClient.instantiate_for_read_access()
+        try:
+            value = client.get_value_from_handle(pid, "URL")
+            pass
+        except handleexceptions.HandleSyntaxError as e:
+            errorMessage = "B2HANDLE: %s" % str(
+                e)
+            log.critical(errorMessage)
+            return self.send_errors(message=errorMessage, code=hcodes.HTTP_BAD_REQUEST)
+        except handleexceptions.HandleNotFoundException as e:
+            errorMessage = "B2HANDLE: %s" % str(
+                e)
+            log.critical(errorMessage)
+            return self.send_errors(message=errorMessage, code=hcodes.HTTP_BAD_NOTFOUND)
+        if value is None:
+            return self.send_errors(message='B2HANDLE empty value returned', code=hcodes.HTTP_BAD_NOTFOUND)
 
-        return "Hello world!"
+        #################
+        # If downlaod is True, trigger file download
+        ##################
+        if self._args.get('download'):
+            pass
+
+        return value

@@ -7,7 +7,7 @@ file: extended
 
 mapping:
   all: "/pids"
-  single: "/pids/<string:pid>"
+  single: "/pids/<path:pid>"
 labels:
   - eudat
   - pids
