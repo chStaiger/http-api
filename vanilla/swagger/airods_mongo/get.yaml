@@ -1,5 +1,245 @@
+#mongodata: /eposws/statics/data
+# (download data or retrieve PIDs list)
 
-mongotest:
-  responses:
-    '200':
-      description: something
+common:
+    parameters:
+    
+        
+        ## REQUIRED - PARAMS
+        
+        #DATE-TIME
+      - name: start
+        description: Limit to results starting on or after the specified start time
+        in: query
+        # @TODO: iso date-time...
+        type: string
+        #format: ISO 8601
+        default: "12-02-2017T00.00.00"  
+        required: True
+    
+      - name: end
+        description: Limit to results ending on or before the specified end time
+        in: query
+        # @TODO: iso date-time...
+        type: string
+        #format: ISO 8601
+        default: "13-02-2017T00.00.00"
+        required: True
+        
+        
+       # LAT-LON BOX
+      - name: minlat
+        description: Limit to results starting on or after the specified Latitude
+        in: query
+        # @TODO: geo-reference...
+        type: string
+        #format: ISO 8601
+        minimum: 0
+        exclusiveMinimum: true
+        maximum: 90
+        exclusiveMaximum: false
+        #multipleOf: 10
+        default: 12.30
+        required: True
+
+
+      - name: minlon
+        description: Limit to results starting on or after the specified start Longitude
+        in: query
+        # @TODO: geo-reference...
+        type: string
+        #format: ISO 8601
+        minimum: 0
+        exclusiveMinimum: true
+        maximum: 90
+        exclusiveMaximum: false
+        #multipleOf: 10
+        default: 42.30
+        required: True
+
+      - name: maxlat
+        description: Limit to results ending on or before the specified end Latitude
+        in: query
+        # @TODO: geo-reference...
+        type: string
+        #format: ISO 8601
+        minimum: 0
+        exclusiveMinimum: true
+        maximum: 90
+        exclusiveMaximum: false
+        #multipleOf: 10
+        default: 13.30
+        required: True
+
+      - name: maxlon
+        description: Limit to results ending on or before the specified end Longitude
+        in: query
+        # @TODO: geo-reference...
+        type: string
+        #format: ISO 8601
+        minimum: 0
+        exclusiveMinimum: true
+        maximum: 90
+        exclusiveMaximum: false
+        #multipleOf: 10
+        default: 43.30
+        required: True 
+        
+        
+      - name: download
+        description: Allow download data  or retrieve metadata in output param
+        in: query
+        type: boolean
+        default: False
+        required: True
+
+        # SPECIFIC
+      - name: gran
+        description: Define the level of granularity for metric day computation. Eg day, hour, month, etc
+        in: query
+        # @TODO: 
+        type: string
+        default: "day"
+        required: false
+        
+      - name: include
+        description: Choose which metric to show in the results. Support lists e.g include=sample_sdv, sample_rms
+        in: query
+        type: string
+        default: "sample_sdv,sample_rms" 
+        required: false
+  
+        
+      - name: limit
+        description: Make query limit (default=20)
+        in: query
+        type: string
+        # integer
+        default: "0" 
+        required: False    
+
+      - name: offset
+        description: Make query offset (default=0)
+        in: query
+        type: string
+        # integer
+        default: "20"
+        required: False
+        
+        
+      - name: output
+        description:  Specifies the desired output format. Valid json values xml, json
+        in: query
+        type: string
+        default: "json" 
+        required: False 
+        
+        
+        
+      - name: psr
+        description: Reduce segments by eliminating redundant sample rates (prefsamprate)
+        in: query
+        type: string
+        default: ""
+        required: False
+        
+        
+      - name: group
+        description: Make sure that all components have common sample rate
+        in: query
+        type: boolean
+        default: True 
+        required: False    
+
+      - name: fulltw
+        description: Make sure that full time window is available
+        in: query
+        type: boolean
+        default: False
+        required: False
+        
+        
+      - name: minlen
+        description:  Limit results to continuous data segments of a minimum length specified in seconds, and include information about these segments
+        in: query
+        type: string
+        #float
+        default: "" 
+        required: False
+        
+
+      - name: longestonly
+        description: Limit results to the longest continuous  segment per channel, and include information about this segment
+        in: query
+        type: boolean
+        default: False 
+        required: False    
+
+      - name: extended
+        description: Includes information about continuous segments
+        in: query
+        type: boolean
+        default: False
+        required: False
+        
+        
+      - name: scaled
+        description: Take channel gain into account (scale metrics to physical units)
+        in: query
+        type: boolean
+        default: False 
+        required: False        
+      
+      
+mongoData:
+    
+    summary: Get data from iRODS via boundingBox-timeWindow
+  
+    #parameters:
+        # @TODO : how to add common and specific parameters
+        #- $ref: "#/common/parameters"
+        
+        
+    responses:
+        '200':
+          description: Successful request, results follow
+          
+        '204':
+          description: Request was properly formatted and submitted but no data matches the selection  
+
+        '400':
+          description: Bad request due to improper specification, unrecognised parameter, parameter value out of range, etc.
+        
+        '413':
+          description: Request would result in too much data being returned or the request itself is too large.
+
+        '500':
+          description: Internal server error
+
+        '503':
+          description: Service temporarily unavailable, used in maintenance mode
+          
+mongoMetaData:
+    
+    summary: Get MetaData from iRODS via boundingBox-timeWindow
+  
+    
+    responses:
+        '200':
+          description: Successful request, results follow
+          
+        '204':
+          description: Request was properly formatted and submitted but no data matches the selection  
+
+        '400':
+          description: Bad request due to improper specification, unrecognised parameter, parameter value out of range, etc.
+        
+        '413':
+          description: Request would result in too much data being returned or the request itself is too large.
+
+        '500':
+          description: Internal server error
+
+        '503':
+          description: Service temporarily unavailable, used in maintenance mode
+

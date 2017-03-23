@@ -3,6 +3,10 @@ class: TestMongo
 file: airods
 # baseuri: /api
 mapping:
-  mongotest: /airodsmongo
+    
+  mongoData: "/statics/data"
+  mongoMetaData: "/statics/metadata"
+
+  
 labels:
-  - epos
+  - epos discover & access to data (bounding box)
