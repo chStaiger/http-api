@@ -18,7 +18,8 @@ class TestMongo(EndpointResource):
         log.info("just a test")
         mongohd = self.global_get_service('mongo', dbname='mytest')
         
-        # 	"_cls" : "commons.models.custom.mongo.Testing"
+        # --> important into mongo collections we must have: 
+        #     "_cls" : "commons.models.custom.mongo.Testing"
         mongohd.Testing(onefield='justatest').save()
         # log.pp(mongohd)
         print(mongohd)
@@ -27,14 +28,38 @@ class TestMongo(EndpointResource):
         
         if myargs.get('download') == 'true':
             # TO FIX: problem with swagger-ui boolean?
-            #return("TEST! download ok")
-            return RESPONSE1
+            return("TEST! download ok")
+            #return RESPONSE1
         else:
             #n = json.dumps(RESPONSE1)  
             #o = json.loads(n)
-            return  RESPONSE2
+            return  RESPONSE1
         
-        #"it works! - no download" str.replace(RESPONSE1, '\n', '\r\n')
+        #"it works! - no download" str.replace(RESPONSE1, '\n', '\r\n') TestMongoMeta
+
+    
+class TestMongoMeta(EndpointResource):
+
+    def get(self):
+        log.info("just a test")
+        mongohd = self.global_get_service('mongo', dbname='mytest')
+        
+        # --> important into mongo collections we must have: 
+        #     "_cls" : "commons.models.custom.mongo.Testing"
+        mongohd.Testing(onefield='justatest').save()
+        # log.pp(mongohd)
+        print(mongohd)
+        myargs= self.get_input()
+        print(myargs)
+        
+        if myargs.get('download') == 'true':
+            # TO FIX: problem with swagger-ui boolean?
+            return("TEST! download is impossible!")
+            #return RESPONSE1
+        else:
+            #n = json.dumps(RESPONSE1)  
+            #o = json.loads(n)
+            return  RESPONSE2    
     
 class TestMongo1(EndpointResource):
 
