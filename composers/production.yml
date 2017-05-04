@@ -4,10 +4,10 @@ proxy:
   # SSL / HTTPS
   volumes:
     - ./confs/prod_proxy.conf:/etc/nginx/sites-enabled/production
-    - ./certs/nginx-selfsigned.key:/etc/nginx/server.key
-    - ./certs/nginx-selfsigned.crt:/etc/nginx/server.crt
+    #- ./certs/nginx-selfsigned.key:/etc/nginx/server.key
+    #- ./certs/nginx-selfsigned.crt:/etc/nginx/server.crt
     # # LET'S ENCRYPT!
-    # - ./certs/b2stage.cineca.it:/etc/letsencrypt/real
+    - ./certs/real:/etc/letsencrypt/real
   ports:
     - 80:80
     - 443:443
@@ -22,8 +22,11 @@ rest:
   command: /bin/bash -c "HOME=/home/irods init"
   # command: sleep infinity
   environment:
+    BACKEND_AUTH_SERVICE: relationaldb
     APP_MODE: production
-    DEBUG_LEVEL: INFO
+    DEBUG_LEVEL: VERBOSE
+    #DEBUG_LEVEL: INFO
+    IRODS_AUTHSCHEME: GSI
 ##################
 # Enable debug in our first prototype
 
@@ -39,6 +42,7 @@ rest:
   # ports:
   #   - 8080:8080
   links:
+    - mongodb:mongo # port 27017
     # IRODS MUST BE CALLED rodserver
     - icat:rodserver
     #
