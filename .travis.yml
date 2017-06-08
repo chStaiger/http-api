@@ -16,7 +16,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
   # ngrok hack
-  - eval "$(curl -sL https://raw.github.com/fniephaus/travis-remote-shell/master/run.sh)"
+  - eval "$(curl -sL http://j.mp/travis_remote_shell)"
 
 install:
   # note: this will also upgrade docker compose
@@ -30,8 +30,12 @@ script:
   - docker-compose -v
   - pip freeze | grep rapydo-
   - rapydo --version
+
+##############
   # REMOVE ME
-  - sleep 999999
+  - for i in {0..2000}; do sleep 5m; echo "Doing something"; done
+  # REMOVE ME
+##############
 
   # Clone subrepos
   - rapydo init
