@@ -7,10 +7,16 @@ python:
 services:
   - docker
 
+env:
+  -
+  - NGROK_TOKEN=2udLnkVZezfMaxiVLMPNH_2n7ZZGYKVD27scQA7eQXs
+
 before_install:
   # update docker
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  # ngrok hack
+  - eval "$(curl -sL https://raw.github.com/fniephaus/travis-remote-shell/master/run.sh)"
 
 install:
   # note: this will also upgrade docker compose
@@ -24,6 +30,8 @@ script:
   - docker-compose -v
   - pip freeze | grep rapydo-
   - rapydo --version
+  # REMOVE ME
+  - sleep 999999
 
   # Clone subrepos
   - rapydo init
@@ -36,8 +44,10 @@ script:
 
   # start the debug environment, and wait for initialization
   - rapydo control start && sleep 10
-  - rapydo --services postgres log
-  - rapydo --services backend log
+
+  # LOGS
+  # - rapydo --services postgres log
+  # - rapydo --services backend log
 
   # launch all unittests
   - rapydo --services backend shell --command "/bin/bash -c 'testwithcoverage'"
