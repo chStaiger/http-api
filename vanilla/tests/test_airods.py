@@ -43,7 +43,11 @@ class TestSomething(RestTestsAuthenticatedBase):
         """ First test """
 
         log.info('*** Testing GET')
-        endpoint = (self._api_uri + self._main_endpoint + self._my_params)
+        endpoint = (
+            self._api_uri +
+            self._main_endpoint +
+            self._my_params + '&debug=yes'
+        )
         r = self.app.get(endpoint)  # , headers=self.__class__.auth_header)
         print("TESTING DATA FROM CALL", r.data)
         self.assertEqual(r.status_code, self._hcodes.HTTP_OK_BASIC)

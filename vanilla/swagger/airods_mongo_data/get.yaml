@@ -3,10 +3,16 @@
 
 common:
     parameters:
-    
-        
+
+      - name: debug
+        description: for debugging
+        in: query
+        type: string
+        default: "no"
+        required: False
+
         ## REQUIRED - PARAMS
-        
+
         #DATE-TIME
       - name: start
         description: Limit to results starting on or after the specified start time
@@ -14,9 +20,9 @@ common:
         # @TODO: iso date-time...
         type: string
         #format: ISO 8601
-        default: "13-01-2015T00:00:00Z"  
+        default: "13-01-2015T00:00:00Z"
         required: True
-    
+
       - name: end
         description: Limit to results ending on or before the specified end time
         in: query
@@ -25,8 +31,8 @@ common:
         #format: ISO 8601
         default: "14-01-2015T00:00:00Z"
         required: True
-        
-        
+
+
        # LAT-LON BOX
       - name: minlat
         description: Limit to results starting on or after the specified Latitude
@@ -84,9 +90,9 @@ common:
         exclusiveMaximum: false
         #multipleOf: 10
         default: 13.30
-        required: True 
-        
-        
+        required: True
+
+
       - name: download
         description: Allow download data  or retrieve PID / URI of digital object
         in: query
@@ -95,14 +101,14 @@ common:
         required: True
 
         # SPECIFIC
- 
+
       - name: limit
         description: Make query limit (default=20)
         in: query
         type: string
         # integer
-        default: "0" 
-        required: False    
+        default: "0"
+        required: False
 
       - name: offset
         description: Make query offset (default=0)
@@ -111,37 +117,37 @@ common:
         # integer
         default: "20"
         required: False
-        
-        
+
+
       - name: output
-        description:  Specifies the desired output format (if is set download param). Valid json values xml, json 
+        description:  Specifies the desired output format (if is set download param). Valid json values xml, json
         in: query
         type: string
-        default: "json" 
-        required: False 
-        
+        default: "json"
+        required: False
 
-      
-      
+
+
+
 mongoData:
-    
+
     summary: Get data from iRODS via boundingBox-timeWindow
-  
+
     #parameters:
         # @TODO : how to add common and specific parameters
         #- $ref: "#/common/parameters"
-        
-        
+
+
     responses:
         '200':
           description: Successful request, results follow
-          
+
         '204':
-          description: Request was properly formatted and submitted but no data matches the selection  
+          description: Request was properly formatted and submitted but no data matches the selection
 
         '400':
           description: Bad request due to improper specification, unrecognised parameter, parameter value out of range, etc.
-        
+
         '413':
           description: Request would result in too much data being returned or the request itself is too large.
 
