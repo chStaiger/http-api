@@ -46,7 +46,7 @@ class TestSomething(RestTestsAuthenticatedBase):
         endpoint = (
             self._api_uri +
             self._main_endpoint +
-            self._my_params + '&debug=yes'
+            self._my_params + '&debug=no'
         )
         r = self.app.get(endpoint)  # , headers=self.__class__.auth_header)
         print("TESTING DATA FROM CALL", r.data)

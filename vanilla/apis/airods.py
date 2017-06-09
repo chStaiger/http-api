@@ -18,7 +18,7 @@ class TestMongo(EndpointResource):
 
     def get(self):
         log.info("just a test")
-        mongohd = self.global_get_service('mongo', dbname='test')
+        mongohd = self.global_get_service('mongo', dbname='auth')
         myargs = self.get_input()
         print(myargs)
 
@@ -51,14 +51,14 @@ class TestMongo(EndpointResource):
 
         else:
 
-            return  ["total files to download:"+str(len(documentResult1)),documentResult1]
+            return  ["total files to download:"+str(len(documentResult1))]   # ,documentResult1
 
 
 class TestMongoMeta(EndpointResource):
 
     def get(self):
         log.info("just a test")
-        mongohd = self.global_get_service('mongo', dbname='test')
+        mongohd = self.global_get_service('mongo', dbname='auth')
         myargs = self.get_input()
         print(myargs)
 
