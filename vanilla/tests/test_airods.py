@@ -47,3 +47,4 @@ class TestSomething(RestTestsAuthenticatedBase):
         self.assertEqual(r.status_code, self._hcodes.HTTP_OK_BASIC)
         log.info('*** Testing GET FAKE - OK')
         
+        

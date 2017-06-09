@@ -88,7 +88,7 @@ common:
         
         
       - name: download
-        description: Allow download data  or retrieve metadata in output param
+        description: Allow download data  or retrieve PID / URI of digital object
         in: query
         type: boolean
         default: False
@@ -114,7 +114,7 @@ common:
         
         
       - name: output
-        description:  Specifies the desired output format. Valid json values xml, json
+        description:  Specifies the desired output format (if is set download param). Valid json values xml, json 
         in: query
         type: string
         default: "json" 
