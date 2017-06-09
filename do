@@ -1,6 +1,6 @@
 #!/bin/bash
 
-core_branch="master"
+core_branch="airods"
 
 echo "# ############################################ #"
 echo -e "\t\tEUDAT HTTP API development"
